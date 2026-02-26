@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fidelity | Profile</title>
+
+<style>
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:#f4f6f5;
+display:flex;
+justify-content:center;
+}
+
+.container{
+width:100%;
+max-width:400px;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+.header{
+background:linear-gradient(135deg,#16a34a,#065f46);
+color:#fff;
+padding:30px 20px;
+border-bottom-left-radius:28px;
+border-bottom-right-radius:28px;
+text-align:center;
+}
+
+.avatar{
+width:82px;height:82px;border-radius:50%;
+background:#fff;color:#16a34a;
+display:flex;align-items:center;justify-content:center;
+font-size:34px;font-weight:800;margin:auto;
+}
+
+.name{margin-top:12px;font-size:20px;font-weight:700;}
+.email{font-size:13px;opacity:.9;}
+
+.verified{
+margin-top:8px;
+font-size:12px;
+background:rgba(255,255,255,.2);
+padding:6px 14px;
+border-radius:20px;
+display:inline-block;
+}
+
+/* WALLET */
+.wallet-card{
+background:#fff;
+margin:-35px 20px 20px;
+border-radius:22px;
+padding:22px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.wallet-balance{
+font-size:30px;
+font-weight:800;
+margin-top:6px;
+color:#16a34a;
+}
+
+/* CARD */
+.card{
+background:#fff;
+margin:15px 20px;
+border-radius:18px;
+padding:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.section-title{
+font-size:16px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+font-size:14px;
+}
+
+/* ===== ICON SLIDER ===== */
+.app-info-wrapper{
+margin:10px 0 20px;
+padding-left:20px;
+overflow:hidden;
+}
+
+.app-info-track{
+display:flex;
+gap:14px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+-webkit-overflow-scrolling:touch;
+}
+.app-info-track::-webkit-scrollbar{display:none;}
+
+.app-info-card{
+flex:0 0 calc((100% - 56px)/3);
+background:#fff;
+border-radius:18px;
+padding:18px 10px;
+text-align:center;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.25s;
+}
+
+.app-info-card:active{
+transform:scale(.92);
+}
+
+.app-info-icon{font-size:26px;}
+.app-info-card span{
+display:block;font-size:12px;margin-top:8px;font-weight:600;
+}
+
+/* ===== SMART TIP CARD ===== */
+.smart-tip-card{
+margin:0 20px 20px;
+padding:18px;
+border-radius:18px;
+display:flex;
+gap:14px;
+align-items:center;
+background:linear-gradient(135deg,#ecfdf5,#ffffff);
+border:1px solid rgba(22,163,74,.15);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+animation:tipFloat 4s ease-in-out infinite;
+}
+
+@keyframes tipFloat{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-4px);}
+}
+
+.tip-icon{
+font-size:26px;
+background:#16a34a;
+color:#fff;
+width:44px;height:44px;
+border-radius:12px;
+display:flex;align-items:center;justify-content:center;
+}
+
+.tip-title{font-weight:700;font-size:14px;color:#065f46;}
+
+.tip-text{
+font-size:13px;
+margin-top:3px;
+color:#374151;
+opacity:0;
+transition:.4s;
+}
+.tip-text.show{opacity:1;}
+
+/* SHEET */
+.app-sheet{
+position:fixed;
+left:0;right:0;bottom:-100%;
+background:#fff;
+border-radius:24px 24px 0 0;
+padding:22px;
+box-shadow:0 -15px 40px rgba(0,0,0,.25);
+transition:.35s;
+z-index:9999;
+max-width:400px;margin:auto;
+}
+.app-sheet.show{bottom:0;}
+
+.input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #e5e7eb;
+}
+
+.save-btn{
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+background:#16a34a;
+color:#fff;
+border-radius:12px;
+font-weight:700;
+}
+
+.sheet-close{
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+background:#111827;
+color:#fff;
+border-radius:12px;
+}
+
+/* NAV */
+.bottom-nav{
+margin-top:auto;
+height:70px;
+background:#fff;
+border-top:1px solid #eee;
+display:flex;
+}
+.nav-item{
+flex:1;text-align:center;padding-top:10px;
+text-decoration:none;color:#6b7280;
+}
+.nav-item.active{color:#16a34a;font-weight:700;}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div id="avatar" class="avatar">U</div>
+<div id="username" class="name"></div>
+<div id="useremail" class="email"></div>
+<div class="verified">✔ KYC Verified</div>
+</div>
+
+<div class="wallet-card">
+<div>Available Balance</div>
+<div id="wallet" class="wallet-balance">₹0.00</div>
+</div>
+
+<div class="card">
+<div class="section-title">Account Information</div>
+<div class="row"><span>Full Name</span><span id="fullName"></span></div>
+<div class="row"><span>Phone</span><span id="phone"></span></div>
+<div class="row"><span>Email</span><span id="gmail"></span></div>
+</div>
+
+<!-- ✅ ICON SLIDER MOVED HERE -->
+<div class="app-info-wrapper">
+<div class="app-info-track">
+
+<!-- ONLY ICON ATTRIBUTE CHANGED -->
+
+<div class="app-info-card" data-type="bank">
+<div class="app-info-icon">🏦</div><span>Bank</span>
+</div>
+
+<div class="app-info-card" data-type="upi">
+<div class="app-info-icon">📱</div><span>UPI</span>
+</div>
+
+<div class="app-info-card" data-type="help">
+<div class="app-info-icon">🛟</div><span>Help</span>
+</div>
+
+<div class="app-info-card" data-type="about">
+<div class="app-info-icon">ℹ️</div><span>About</span>
+</div>
+
+<div class="app-info-card" data-type="rules">
+<div class="app-info-icon">📜</div><span>Rules</span>
+</div>
+
+<div class="app-info-card" data-type="terms">
+<div class="app-info-icon">✅</div><span>Terms</span>
+</div>
+
+</div>
+</div>
+
+<!-- ✅ SMART TIP AT BOTTOM -->
+<div class="smart-tip-card">
+<div class="tip-icon">💡</div>
+<div>
+<div class="tip-title">Smart Tip</div>
+<div id="smartTipText" class="tip-text">Loading personalized tips...</div>
+</div>
+</div>
+
+<nav class="bottom-nav">
+<a href="dashboard.html" class="nav-item">🏠 Home</a>
+<a href="wallet.html" class="nav-item">💰 Wallet</a>
+<a href="profile.html" class="nav-item active">👤 Profile</a>
+</nav>
+
+</div>
+
+<!-- SHEET -->
+<div id="sheet" class="app-sheet">
+<h3 id="sheetTitle"></h3>
+<div id="sheetContent"></div>
+<button class="sheet-close" onclick="closeSheet()">Close</button>
+</div>
+
+<!-- ✅ ONLY SCRIPT PART CHANGED — EVERYTHING ELSE SAME -->
+
+<script>
+
+/* ===== SAFE ELEMENT REFERENCES ===== */
+const sheet = document.getElementById("sheet");
+const sheetTitle = document.getElementById("sheetTitle");
+const sheetContent = document.getElementById("sheetContent");
+
+/* USER LOAD */
+function formatINR(v){
+return "₹"+Number(v).toLocaleString("en-IN",{minimumFractionDigits:2});
+}
+
+const username = document.getElementById("username");
+const useremail = document.getElementById("useremail");
+const avatar = document.getElementById("avatar");
+const wallet = document.getElementById("wallet");
+const fullName = document.getElementById("fullName");
+const gmail = document.getElementById("gmail");
+const phone = document.getElementById("phone");
+
+const name = localStorage.userName || "User";
+const email = localStorage.userEmail || "Not Provided";
+const walletAmt = localStorage.wallet || 0;
+
+username.textContent = name;
+useremail.textContent = email;
+avatar.textContent = name.charAt(0);
+wallet.textContent = formatINR(walletAmt);
+fullName.textContent = name;
+gmail.textContent = email;
+phone.textContent = localStorage.userPhone || "Not Added";
+
+/* ===== ICON ACTIONS (WITH FULL INFO CONTENT) ===== */
+document.querySelectorAll(".app-info-card").forEach(card=>{
+card.addEventListener("click",()=>{
+
+const type = card.dataset.type;
+
+if(type==="bank"){
+openSheet("Bank Details",`
+<input class="input" id="bankName" placeholder="Bank Name">
+<input class="input" id="acc" placeholder="Account Number">
+<input class="input" id="ifsc" placeholder="IFSC Code">
+<button class="save-btn" onclick="saveBank()">Save Bank</button>`);
+}
+
+else if(type==="upi"){
+openSheet("UPI Details",`
+<input class="input" id="upi" placeholder="example@upi">
+<button class="save-btn" onclick="saveUPI()">Save UPI</button>`);
+}
+
+/* ===== HELP ===== */
+else if(type==="help"){
+openSheet("Help & Support",`
+<p>
+Our support team is available to help you with account access, wallet credits,
+withdrawals, and technical issues. We aim to resolve most queries within 24 hours.
+</p>
+
+<p>
+If you experience payment delays, login problems, or transaction errors,
+please contact us using the official support email below.
+</p>
+
+<p><strong>Email:</strong> support@fidelityapp.in</p>
+<p><strong>Support Hours:</strong> 10:00 AM – 7:00 PM (Mon–Sat)</p>
+`);
+}
+
+/* ===== ABOUT ===== */
+else if(type==="about"){
+openSheet("About Fidelity",`
+<p>
+Fidelity is a modern fintech reward platform designed to provide users with
+a smooth digital wallet experience combined with performance-based rewards.
+</p>
+
+<p>
+Our goal is to create a secure, transparent, and user-friendly ecosystem where
+users can manage earnings, track activity, and withdraw rewards safely through
+verified banking and UPI systems.
+</p>
+
+<p>
+We focus on simplicity, fast payouts, and a premium mobile-first experience.
+</p>
+`);
+}
+
+/* ===== RULES ===== */
+else if(type==="rules"){
+openSheet("Platform Rules",`
+<p>
+Users must maintain fair usage of the platform. Any attempt to manipulate
+rewards, create duplicate accounts, or abuse system features may result
+in account suspension.
+</p>
+
+<p>
+Only genuine activity is eligible for rewards and withdrawals.
+Accounts flagged for suspicious behaviour may undergo verification checks.
+</p>
+
+<p>
+Always keep your account credentials private to maintain account security.
+</p>
+`);
+}
+
+/* ===== TERMS ===== */
+else if(type==="terms"){
+openSheet("Terms & Conditions",`
+<p>
+All wallet balances are digital reward credits within the Fidelity ecosystem.
+Withdrawals are processed only after successful account verification.
+</p>
+
+<p>
+Processing times may vary depending on banking partners and payment gateways.
+Fidelity reserves the right to modify reward structures or policies to ensure
+platform stability and fairness.
+</p>
+
+<p>
+By continuing to use the platform, you agree to comply with all operational
+and security policies defined by Fidelity.
+</p>
+`);
+}
+
+});
+});
+
+
+/* ===== SHEET FUNCTIONS ===== */
+function openSheet(title,html){
+sheetTitle.innerText = title;
+sheetContent.innerHTML = html;
+sheet.classList.add("show");
+}
+
+function closeSheet(){
+sheet.classList.remove("show");
+}
+
+
+/* ===== SAVE FUNCTIONS ===== */
+function saveBank(){
+localStorage.bankName =
+document.getElementById("bankName").value;
+
+alert("✅ Bank Saved");
+closeSheet();
+}
+
+function saveUPI(){
+localStorage.upiId =
+document.getElementById("upi").value;
+
+alert("✅ UPI Saved");
+closeSheet();
+}
+
+
+/* ===== SMART TIP ENGINE ===== */
+const tipText=document.getElementById("smartTipText");
+
+function generateTips(){
+let tips=[];
+if(!localStorage.bankName) tips.push("🏦 Add bank details to enable withdrawals.");
+if(!localStorage.upiId) tips.push("📱 Link UPI for faster payouts.");
+if(walletAmt==0) tips.push("🚀 Start earning by completing tasks.");
+tips.push("⭐ Active users receive bonus rewards.");
+return tips;
+}
+
+const smartTips=generateTips();
+let i=0;
+
+function rotateTips(){
+tipText.classList.remove("show");
+setTimeout(()=>{
+tipText.innerText=smartTips[i];
+tipText.classList.add("show");
+i=(i+1)%smartTips.length;
+},300);
+}
+
+rotateTips();
+setInterval(rotateTips,5000);
+
+</script>
+</body>
+</html>
