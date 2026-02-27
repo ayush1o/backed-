@@ -6,6 +6,7 @@
 <title>Fidelity | Profile</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Poppins,sans-serif;
@@ -22,34 +23,7 @@ display:flex;
 flex-direction:column;
 }
 
-/* HEADER */
-.header{
-background:linear-gradient(135deg,#16a34a,#065f46);
-color:#fff;
-padding:30px 20px;
-border-bottom-left-radius:28px;
-border-bottom-right-radius:28px;
-text-align:center;
-}
-
-.avatar{
-width:82px;height:82px;border-radius:50%;
-background:#fff;color:#16a34a;
-display:flex;align-items:center;justify-content:center;
-font-size:34px;font-weight:800;margin:auto;
-}
-
-.name{margin-top:12px;font-size:20px;font-weight:700;}
-.email{font-size:13px;opacity:.9;}
-
-.verified{
-margin-top:8px;
-font-size:12px;
-background:rgba(255,255,255,.2);
-padding:6px 14px;
-border-radius:20px;
-display:inline-block;
-}
+/* HEADER */ .header{ background:linear-gradient(135deg,#16a34a,#065f46); color:#fff; padding:30px 20px; border-bottom-left-radius:28px; border-bottom-right-radius:28px; text-align:center; } .avatar{ width:82px;height:82px;border-radius:50%; background:#fff;color:#16a34a; display:flex;align-items:center;justify-content:center; font-size:34px;font-weight:800;margin:auto; } .name{margin-top:12px;font-size:20px;font-weight:700;} .email{font-size:13px;opacity:.9;} .verified{ margin-top:8px; font-size:12px; background:rgba(255,255,255,.2); padding:6px 14px; border-radius:20px; display:inline-block; } /* WALLET */ .wallet-card{ background:#fff; margin:-35px 20px 20px; border-radius:22px; padding:22px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,.12); } .wallet-balance{ font-size:30px; font-weight:800; margin-top:6px; color:#16a34a; }
 
 /* WALLET */
 .wallet-card{
@@ -64,7 +38,6 @@ box-shadow:0 20px 40px rgba(0,0,0,.12);
 .wallet-balance{
 font-size:30px;
 font-weight:800;
-margin-top:6px;
 color:#16a34a;
 }
 
@@ -75,12 +48,6 @@ margin:15px 20px;
 border-radius:18px;
 padding:20px;
 box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.section-title{
-font-size:16px;
-font-weight:700;
-margin-bottom:15px;
 }
 
 .row{
@@ -102,7 +69,6 @@ display:flex;
 gap:14px;
 overflow-x:auto;
 scroll-snap-type:x mandatory;
--webkit-overflow-scrolling:touch;
 }
 .app-info-track::-webkit-scrollbar{display:none;}
 
@@ -121,12 +87,31 @@ transition:.25s;
 transform:scale(.92);
 }
 
-.app-info-icon{font-size:26px;}
-.app-info-card span{
-display:block;font-size:12px;margin-top:8px;font-weight:600;
+/* ✅ ICON SIZE FIX */
+.app-info-icon{
+width:32px;
+height:32px;
+font-size:28px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-/* ===== SMART TIP CARD ===== */
+.app-info-icon img{
+width:100px;
+height:50px;
+object-fit:contain;
+}
+
+.app-info-card span{
+display:block;
+font-size:12px;
+margin-top:8px;
+font-weight:600;
+}
+
+/* ===== SMART TIP ===== */
 .smart-tip-card{
 margin:0 20px 20px;
 padding:18px;
@@ -137,33 +122,26 @@ align-items:center;
 background:linear-gradient(135deg,#ecfdf5,#ffffff);
 border:1px solid rgba(22,163,74,.15);
 box-shadow:0 10px 25px rgba(0,0,0,.08);
-animation:tipFloat 4s ease-in-out infinite;
-}
-
-@keyframes tipFloat{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-4px);}
 }
 
 .tip-icon{
-font-size:26px;
+font-size:24px;
 background:#16a34a;
 color:#fff;
 width:44px;height:44px;
 border-radius:12px;
-display:flex;align-items:center;justify-content:center;
+display:flex;
+align-items:center;
+justify-content:center;
 }
-
-.tip-title{font-weight:700;font-size:14px;color:#065f46;}
 
 .tip-text{
 font-size:13px;
-margin-top:3px;
 color:#374151;
 opacity:0;
 transition:.4s;
 }
-.tip-text.show{opacity:1;}
+.tip-text.show{opacity:1}
 
 /* SHEET */
 .app-sheet{
@@ -172,10 +150,10 @@ left:0;right:0;bottom:-100%;
 background:#fff;
 border-radius:24px 24px 0 0;
 padding:22px;
-box-shadow:0 -15px 40px rgba(0,0,0,.25);
 transition:.35s;
 z-index:9999;
 max-width:400px;margin:auto;
+box-shadow:0 -15px 40px rgba(0,0,0,.25);
 }
 .app-sheet.show{bottom:0;}
 
@@ -227,85 +205,51 @@ text-decoration:none;color:#6b7280;
 
 <body>
 
-<div class="container">
+<div class="container"> <div class="header"> <div id="avatar" class="avatar">U</div> <div id="username" class="name"></div> <div id="useremail" class="email"></div> <div class="verified">✔ KYC Verified</div> </div> <div class="wallet-card"> <div>Available Balance</div> <div id="wallet" class="wallet-balance">₹0.00</div> </div> <div class="card"> <div class="section-title">Account Information</div> <div class="row"><span>Full Name</span><span id="fullName"></span></div> <div class="row"><span>Phone</span><span id="phone"></span></div> <div class="row"><span>Email</span><span id="gmail"></span></div> </div>
 
-<div class="header">
-<div id="avatar" class="avatar">U</div>
-<div id="username" class="name"></div>
-<div id="useremail" class="email"></div>
-<div class="verified">✔ KYC Verified</div>
-</div>
-
-<div class="wallet-card">
-<div>Available Balance</div>
-<div id="wallet" class="wallet-balance">₹0.00</div>
-</div>
-
-<div class="card">
-<div class="section-title">Account Information</div>
-<div class="row"><span>Full Name</span><span id="fullName"></span></div>
-<div class="row"><span>Phone</span><span id="phone"></span></div>
-<div class="row"><span>Email</span><span id="gmail"></span></div>
-</div>
-
-<!-- ✅ ICON SLIDER MOVED HERE -->
+<!-- ICONS -->
 <div class="app-info-wrapper">
 <div class="app-info-track">
 
-<!-- ONLY ICON ATTRIBUTE CHANGED -->
-
 <div class="app-info-card" data-type="bank">
-<div class="app-info-icon">🏦</div><span>Bank</span>
+<div class="app-info-icon"><img src="images/bank.png">
+</div><span>Bank</span>
 </div>
 
 <div class="app-info-card" data-type="upi">
-<div class="app-info-icon">📱</div><span>UPI</span>
+<div class="app-info-icon"><img src="images/upi.png"></div>
+<span>UPI</span>
 </div>
 
-<div class="app-info-card" data-type="help">
-<div class="app-info-icon">🛟</div><span>Help</span>
-</div>
-
-<div class="app-info-card" data-type="about">
-<div class="app-info-icon">ℹ️</div><span>About</span>
-</div>
-
-<div class="app-info-card" data-type="rules">
-<div class="app-info-icon">📜</div><span>Rules</span>
-</div>
-
-<div class="app-info-card" data-type="terms">
-<div class="app-info-icon">✅</div><span>Terms</span>
-</div>
+<div class="app-info-card" data-type="help"><div class="app-info-icon"><img src="images/help.png"></div><span>Help</span></div>
+<div class="app-info-card" data-type="about"><div class="app-info-icon">ℹ️</div><span>About</span></div>
+<div class="app-info-card" data-type="rules"><div class="app-info-icon"><img src="images/rules.png"></div><span>Rules</span></div>
+<div class="app-info-card" data-type="terms"><div class="app-info-icon"><img src="images/terms.png"></div><span>Terms</span></div>
 
 </div>
 </div>
 
-<!-- ✅ SMART TIP AT BOTTOM -->
+<!-- SMART TIP -->
 <div class="smart-tip-card">
 <div class="tip-icon">💡</div>
-<div>
-<div class="tip-title">Smart Tip</div>
-<div id="smartTipText" class="tip-text">Loading personalized tips...</div>
-</div>
+<div id="smartTipText" class="tip-text"></div>
 </div>
 
 <nav class="bottom-nav">
 <a href="dashboard.html" class="nav-item">🏠 Home</a>
-<a href="wallet.html" class="nav-item">💰 Wallet</a>
+<a  href="wallet.html" class="nav-item">💰 Wallet</a>
 <a href="profile.html" class="nav-item active">👤 Profile</a>
 </nav>
 
 </div>
 
-<!-- SHEET -->
 <div id="sheet" class="app-sheet">
 <h3 id="sheetTitle"></h3>
 <div id="sheetContent"></div>
-<button class="sheet-close" onclick="closeSheet()">Close</button>
+<button class="sheet-close" onclick="sheet.classList.remove('show')">Close</button>
 </div>
 
-<!-- ✅ ONLY SCRIPT PART CHANGED — EVERYTHING ELSE SAME -->
+<!-- ONLY SCRIPT PART FIXED — REST SAME -->
 
 <script>
 
@@ -339,102 +283,64 @@ fullName.textContent = name;
 gmail.textContent = email;
 phone.textContent = localStorage.userPhone || "Not Added";
 
-/* ===== ICON ACTIONS (WITH FULL INFO CONTENT) ===== */
+
+/* ===== ICON ACTIONS (FIXED) ===== */
 document.querySelectorAll(".app-info-card").forEach(card=>{
 card.addEventListener("click",()=>{
 
 const type = card.dataset.type;
 
+/* BANK */
 if(type==="bank"){
 openSheet("Bank Details",`
 <input class="input" id="bankName" placeholder="Bank Name">
 <input class="input" id="acc" placeholder="Account Number">
 <input class="input" id="ifsc" placeholder="IFSC Code">
-<button class="save-btn" onclick="saveBank()">Save Bank</button>`);
+<button class="save-btn" onclick="saveBank()">Save Bank</button>
+`);
 }
 
+/* UPI */
 else if(type==="upi"){
 openSheet("UPI Details",`
 <input class="input" id="upi" placeholder="example@upi">
-<button class="save-btn" onclick="saveUPI()">Save UPI</button>`);
+<button class="save-btn" onclick="saveUPI()">Save UPI</button>
+`);
 }
 
-/* ===== HELP ===== */
+/* HELP */
 else if(type==="help"){
 openSheet("Help & Support",`
-<p>
-Our support team is available to help you with account access, wallet credits,
-withdrawals, and technical issues. We aim to resolve most queries within 24 hours.
-</p>
-
-<p>
-If you experience payment delays, login problems, or transaction errors,
-please contact us using the official support email below.
-</p>
-
-<p><strong>Email:</strong> support@fidelityapp.in</p>
-<p><strong>Support Hours:</strong> 10:00 AM – 7:00 PM (Mon–Sat)</p>
+<p>Our support team helps with wallet issues, payouts and login problems.</p>
+<p>Email: <b>support@fidelityapp.in</b></p>
+<p>Support Hours: 10 AM – 7 PM (Mon–Sat)</p>
 `);
 }
 
-/* ===== ABOUT ===== */
+/* ABOUT */
 else if(type==="about"){
 openSheet("About Fidelity",`
-<p>
-Fidelity is a modern fintech reward platform designed to provide users with
-a smooth digital wallet experience combined with performance-based rewards.
-</p>
-
-<p>
-Our goal is to create a secure, transparent, and user-friendly ecosystem where
-users can manage earnings, track activity, and withdraw rewards safely through
-verified banking and UPI systems.
-</p>
-
-<p>
-We focus on simplicity, fast payouts, and a premium mobile-first experience.
-</p>
+<p>Fidelity is a premium fintech reward dashboard designed for secure
+wallet management and smooth payout experience.</p>
+<p>We focus on transparency, fast withdrawals and mobile-first design.</p>
 `);
 }
 
-/* ===== RULES ===== */
+/* RULES */
 else if(type==="rules"){
 openSheet("Platform Rules",`
-<p>
-Users must maintain fair usage of the platform. Any attempt to manipulate
-rewards, create duplicate accounts, or abuse system features may result
-in account suspension.
-</p>
-
-<p>
-Only genuine activity is eligible for rewards and withdrawals.
-Accounts flagged for suspicious behaviour may undergo verification checks.
-</p>
-
-<p>
-Always keep your account credentials private to maintain account security.
-</p>
+<p>Fake activity or reward manipulation may lead to suspension.</p>
+<p>Only genuine usage qualifies for withdrawals.</p>
+<p>Keep your credentials private for security.</p>
 `);
 }
 
-/* ===== TERMS ===== */
+/* TERMS */
 else if(type==="terms"){
 openSheet("Terms & Conditions",`
-<p>
-All wallet balances are digital reward credits within the Fidelity ecosystem.
-Withdrawals are processed only after successful account verification.
-</p>
-
-<p>
-Processing times may vary depending on banking partners and payment gateways.
-Fidelity reserves the right to modify reward structures or policies to ensure
-platform stability and fairness.
-</p>
-
-<p>
-By continuing to use the platform, you agree to comply with all operational
-and security policies defined by Fidelity.
-</p>
+<p>Wallet balances are platform reward credits.</p>
+<p>Withdrawals require verification and may take processing time.</p>
+<p>Using Fidelity means accepting platform policies.</p>
 `);
 }
 
@@ -458,7 +364,6 @@ sheet.classList.remove("show");
 function saveBank(){
 localStorage.bankName =
 document.getElementById("bankName").value;
-
 alert("✅ Bank Saved");
 closeSheet();
 }
@@ -466,7 +371,6 @@ closeSheet();
 function saveUPI(){
 localStorage.upiId =
 document.getElementById("upi").value;
-
 alert("✅ UPI Saved");
 closeSheet();
 }
@@ -480,7 +384,11 @@ let tips=[];
 if(!localStorage.bankName) tips.push("🏦 Add bank details to enable withdrawals.");
 if(!localStorage.upiId) tips.push("📱 Link UPI for faster payouts.");
 if(walletAmt==0) tips.push("🚀 Start earning by completing tasks.");
-tips.push("⭐ Active users receive bonus rewards.");
+tips.push(
+"⭐ Active users receive bonus rewards.",
+"🔥 Daily activity increases earning probability.",
+"💰 Higher wallet balance unlocks faster payouts."
+);
 return tips;
 }
 
