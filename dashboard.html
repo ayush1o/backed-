@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Fidelity | Trading</title>
+<meta name="description" content="Educational trading dashboard UI demo project for learning web development. Not a real trading platform.">
+<title>Dashboard Demo</title>
 <link rel="stylesheet" href="css/auth.css">
 
 <style>
@@ -273,6 +274,7 @@ html,body{
     background:#9ca3af;
     cursor:not-allowed;
 }
+
 /* ===== CREDIT PREMIUM PANEL ===== */
 
 .credit-overlay{
@@ -400,6 +402,7 @@ color:white;
 font-weight:600;
 cursor:pointer;
 }
+
 /* MESSAGE */
 .message{
     margin-top:12px;
@@ -416,15 +419,13 @@ cursor:pointer;
 
 <div class="container">
     <header class="header">    
-        <div class="logo">Fidelity</div>
+        <div class="logo">Fedility</div>
         <div class="icons">
-            <img src="images/credit.png" class="nav-icon" id="creditBtn">
-            <img src="images/spin.png" class="nav-icon" id="spinWheel">
-            <img src="images/wallet.png" class="nav-icon" id="walletBtn">
-        <span>🔔</span>
+    <img src="images/credit.png" class="nav-icon" id="creditBtn">        
+    <img src="images/spin.png" class="nav-icon" id="spinWheel">
+    <img src="images/wallet.png" class="nav-icon" id="walletBtn">              
+    <span>🔔</span>
     <span id="profileBtn">👤</span>
-
-</div>
 
 </div>
 
@@ -432,8 +433,8 @@ cursor:pointer;
 
     <div class="main-content">
         <section class="hero">
-            <h2>Start Trading</h2>
-            <p>Invest in top stocks and track real-time market performance.</p>
+            <h2>Fedility</h2>
+            <p>Smart Secure and trusted by millions</p>
         </section>
 
         <div class="slider">
@@ -450,13 +451,13 @@ cursor:pointer;
             <div class="promo-card">
                 <div class="promo-left">
                     <ul>
-                        <li>Trusted by Millions</li>
-                        <li>No Investment Minimums</li>
-                        <li>Top-Rated User Experience and Support</li>
+                        <li>Building trust with people</li>
+                        <li>Our customer is first priority</li>
+                        <li>24/7 customer support assist</li>
                     </ul>
                 </div>
                 <div class="promo-right">
-                    <button class="btn">Join Now</button>
+                    <button class="btn">Explore</button>
             </div>
         </div>
 
@@ -478,7 +479,7 @@ cursor:pointer;
         Homepage
     </a>
 
-    <a href="https://www.google.com/finance/beta?hl=en" class="nav-item">
+    <a href="#" class="nav-item">
         <span>📈</span>
         Market
     </a>
@@ -492,6 +493,7 @@ cursor:pointer;
 </a>
 
 </div>
+
 <!-- ===== PREMIUM CREDIT SCORE PANEL ===== -->
 <div id="creditPanel" class="credit-overlay">
 
@@ -560,64 +562,213 @@ Submit Review
 
 <script>
 
-/* CREDIT PANEL */
-const creditBtn = document.getElementById("creditBtn");
-const creditPanel = document.getElementById("creditPanel");
-const closeCredit = document.getElementById("closeCredit");
-const scoreNumber = document.getElementById("scoreNumber");
-const progressFill = document.getElementById("progressFill");
+/* ===============================
+   CREDIT SCORE SYSTEM (Fidelity)
+================================ */
 
-creditBtn.onclick = openCredit;
-closeCredit.onclick = ()=> creditPanel.classList.remove("active");
+/* ---------- CREATE CREDIT ICON ---------- */
+const headerIcons = document.querySelector(".icons");
 
-function openCredit(){
-creditPanel.classList.add("active");
-animateCredit(generateScore());
+const creditIcon = document.createElement("span");
+creditIcon.innerHTML = "💳";
+creditIcon.id = "creditBtn";
+creditIcon.style.cursor = "pointer";
+creditIcon.style.fontSize = "20px";
+
+headerIcons.prepend(creditIcon);
+
+
+/* ---------- CREATE CREDIT PANEL ---------- */
+const creditPanel = document.createElement("div");
+creditPanel.id = "creditPanel";
+
+creditPanel.innerHTML = `
+<div class="credit-overlay">
+
+  <div class="credit-card">
+
+      <div class="credit-title">CREDIT SCORE</div>
+
+      <div class="credit-shield">
+          <div id="creditScore">0</div>
+      </div>
+
+      <div class="credit-bar">
+          <div class="credit-progress"></div>
+      </div>
+
+      <p class="credit-info">
+      Your account maintains an excellent credit status.
+      High credit scores increase withdrawal priority,
+      reward eligibility, and platform trust level.
+      </p>
+
+      <button id="closeCredit">Close</button>
+
+  </div>
+
+</div>
+`;
+
+document.body.appendChild(creditPanel);
+
+
+/* ---------- ADD STYLES DYNAMICALLY ---------- */
+const style = document.createElement("style");
+style.innerHTML = `
+.credit-overlay{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.55);
+ backdrop-filter:blur(6px);
+ display:flex;
+ justify-content:center;
+ align-items:flex-end;
+ transform:translateY(100%);
+ transition:.4s ease;
+ z-index:999;
 }
+
+.credit-overlay.active{
+ transform:translateY(0);
+}
+
+.credit-card{
+ width:100%;
+ max-width:400px;
+ background:linear-gradient(180deg,#ffffff,#ecfdf5);
+ border-radius:28px 28px 0 0;
+ padding:25px 20px 30px;
+ text-align:center;
+ box-shadow:0 -10px 40px rgba(0,0,0,.25);
+ animation:creditPop .4s ease;
+}
+
+@keyframes creditPop{
+ from{transform:translateY(40px);opacity:.6;}
+ to{transform:translateY(0);opacity:1;}
+}
+
+.credit-title{
+ font-size:18px;
+ font-weight:700;
+ color:#065f46;
+ margin-bottom:15px;
+}
+
+.credit-shield{
+ width:150px;
+ height:150px;
+ margin:auto;
+ border-radius:50%;
+ background:conic-gradient(#16a34a 0%, #16a34a 100%);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#fff;
+ font-size:42px;
+ font-weight:700;
+ box-shadow:0 10px 30px rgba(22,163,74,.4);
+}
+
+.credit-bar{
+ height:6px;
+ background:#d1fae5;
+ border-radius:10px;
+ margin:20px 0;
+ overflow:hidden;
+}
+
+.credit-progress{
+ height:100%;
+ width:100%;
+ background:#16a34a;
+}
+
+.credit-info{
+ font-size:13px;
+ color:#374151;
+ line-height:1.5;
+ margin-bottom:20px;
+}
+
+#closeCredit{
+ padding:12px;
+ width:100%;
+ border:none;
+ border-radius:12px;
+ background:#111827;
+ color:#fff;
+ font-weight:600;
+ cursor:pointer;
+}
+`;
+document.head.appendChild(style);
+
+
+/* ---------- SCORE LOGIC ---------- */
 
 function generateScore(){
-
-/* Base premium trust score */
-let score = 95;
-
-/* small natural variation */
-score += Math.floor(Math.random()*6); // 95–100
-
-/* extra boost if profile completed */
-if(localStorage.bankName) score += 1;
-if(localStorage.upiId) score += 1;
-
-/* never exceed 100 */
-return Math.min(score,100);
+    return 100; // always premium
 }
 
-/* ANIMATION */
-function animateCredit(target){
+const overlay = document.querySelector(".credit-overlay");
+const scoreEl = document.getElementById("creditScore");
 
-let current = 0;
 
-const interval = setInterval(()=>{
+/* OPEN PANEL */
+creditIcon.addEventListener("click", () => {
 
-current++;
-scoreNumber.innerText=current;
-progressFill.style.width=current+"%";
+    overlay.classList.add("active");
 
-if(current>=target) clearInterval(interval);
+    // reset
+    scoreEl.innerText = "0";
 
-},20);
-}
+    let current = 0;
+    const finalScore = generateScore();
+
+    const counter = setInterval(()=>{
+
+        current++;
+        scoreEl.innerText = current;
+
+        if(current >= finalScore){
+            clearInterval(counter);
+        }
+
+    },15);
+
+});
+
+
+/* CLOSE BUTTON */
+document.getElementById("closeCredit").onclick = () => {
+    overlay.classList.remove("active");
+};
+
+
+/* CLOSE WHEN CLICK OUTSIDE */
+overlay.addEventListener("click",(e)=>{
+    if(e.target === overlay){
+        overlay.classList.remove("active");
+    }
+});
 
 </script>
 
 <script>
-/* PROFILE PAGE REDIRECT */
-const profileBtn = document.getElementById("profileBtn");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (profileBtn) {
-    profileBtn.addEventListener("click", () => {
-        window.location.href = "profile.html";
-    });
-}
+    const profileBtn = document.getElementById("profileBtn");
+
+    if (profileBtn) {
+        profileBtn.addEventListener("click", () => {
+            console.log("Profile clicked");
+            window.location.href = "profile.html";
+        });
+    }
+
+});
 </script>
 
 <!-- ⭐ IMPORTANT -->
