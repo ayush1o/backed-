@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
-  const emailInput = document.getElementById('email');
+  const identifierInput = document.getElementById('identifier');
   const passwordInput = document.getElementById('password');
 
-  if (!loginForm || !emailInput || !passwordInput) return;
+  if (!loginForm || !identifierInput || !passwordInput) return;
 
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const { ok, data } = await window.DemoApi.post('/api/auth/login', {
-      email: emailInput.value,
+      identifier: identifierInput.value,
       password: passwordInput.value
     });
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('demoDisplayName', data.user?.name || 'Demo User');
       window.location.href = 'dashboard.html';
     } else {
-      alert(data.message || 'Demo login failed');
+      alert(data.message || 'Login failed');
     }
 
     loginForm.reset();
