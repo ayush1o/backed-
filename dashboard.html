@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="Educational trading dashboard UI demo project for learning web development. Not a real trading platform.">
-<title>Dashboard Demo</title>
+<title>Fidelity | Trading</title>
 <link rel="stylesheet" href="css/auth.css">
 
 <style>
@@ -274,7 +273,133 @@ html,body{
     background:#9ca3af;
     cursor:not-allowed;
 }
+/* ===== CREDIT PREMIUM PANEL ===== */
 
+.credit-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+backdrop-filter:blur(8px);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:.4s;
+z-index:200;
+}
+
+.credit-overlay.active{
+opacity:1;
+pointer-events:auto;
+}
+
+/* CARD */
+.credit-card{
+width:90%;
+max-width:360px;
+background:linear-gradient(180deg,#ffffff,#ecfdf5);
+border-radius:26px;
+padding:28px 22px;
+text-align:center;
+box-shadow:0 25px 60px rgba(0,0,0,.35);
+animation:scaleIn .35s ease;
+}
+
+@keyframes scaleIn{
+from{transform:scale(.85);opacity:.5;}
+to{transform:scale(1);opacity:1;}
+}
+
+.credit-title{
+font-weight:700;
+letter-spacing:2px;
+color:#065f46;
+margin-bottom:18px;
+}
+
+/* SHIELD */
+.shield-wrapper{
+display:flex;
+justify-content:center;
+margin:10px 0 20px;
+}
+
+.shield{
+width:150px;
+height:170px;
+background:linear-gradient(135deg,#16a34a,#0f7a36);
+clip-path:polygon(50% 0%,90% 18%,90% 60%,50% 100%,10% 60%,10% 18%);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+box-shadow:0 15px 30px rgba(0,0,0,.25);
+}
+
+.shield-half{
+position:absolute;
+left:0;
+top:0;
+width:50%;
+height:100%;
+background:rgba(255,255,255,.25);
+}
+
+.score{
+font-size:38px;
+font-weight:700;
+color:#fff;
+}
+
+/* PROGRESS */
+.progress-wrap{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+}
+
+.progress-bar{
+flex:1;
+height:8px;
+background:#d1fae5;
+border-radius:20px;
+overflow:hidden;
+}
+
+#progressFill{
+height:100%;
+width:0%;
+background:#16a34a;
+transition:1s ease;
+}
+
+/* TEXT */
+.rule-title{
+margin-top:18px;
+font-weight:600;
+color:#065f46;
+}
+
+.credit-text{
+font-size:13px;
+color:#4b5563;
+margin-top:8px;
+line-height:1.5;
+}
+
+.close-credit{
+margin-top:18px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#16a34a;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
 /* MESSAGE */
 .message{
     margin-top:12px;
@@ -291,12 +416,15 @@ html,body{
 
 <div class="container">
     <header class="header">    
-        <div class="logo">Fedility</div>
+        <div class="logo">Fidelity</div>
         <div class="icons">
-    <img src="images/spin.png" class="nav-icon" id="spinWheel">
-    <img src="images/wallet.png" class="nav-icon" id="walletBtn">              
-    <span>🔔</span>
+            <img src="images/credit.png" class="nav-icon" id="creditBtn">
+            <img src="images/spin.png" class="nav-icon" id="spinWheel">
+            <img src="images/wallet.png" class="nav-icon" id="walletBtn">
+        <span>🔔</span>
     <span id="profileBtn">👤</span>
+
+</div>
 
 </div>
 
@@ -304,8 +432,8 @@ html,body{
 
     <div class="main-content">
         <section class="hero">
-            <h2>Fedility</h2>
-            <p>Smart Secure and trusted by millions</p>
+            <h2>Start Trading</h2>
+            <p>Invest in top stocks and track real-time market performance.</p>
         </section>
 
         <div class="slider">
@@ -322,13 +450,13 @@ html,body{
             <div class="promo-card">
                 <div class="promo-left">
                     <ul>
-                        <li>Building trust with people</li>
-                        <li>Our customer is first priority</li>
-                        <li>24/7 customer support assist</li>
+                        <li>Trusted by Millions</li>
+                        <li>No Investment Minimums</li>
+                        <li>Top-Rated User Experience and Support</li>
                     </ul>
                 </div>
                 <div class="promo-right">
-                    <button class="btn">Explore</button>
+                    <button class="btn">Join Now</button>
             </div>
         </div>
 
@@ -350,7 +478,7 @@ html,body{
         Homepage
     </a>
 
-    <a href="#" class="nav-item">
+    <a href="https://www.google.com/finance/beta?hl=en" class="nav-item">
         <span>📈</span>
         Market
     </a>
@@ -363,6 +491,45 @@ html,body{
 </nav>
 </a>
 
+</div>
+<!-- ===== PREMIUM CREDIT SCORE PANEL ===== -->
+<div id="creditPanel" class="credit-overlay">
+
+  <div class="credit-card">
+
+      <div class="credit-title">CREDIT SCORE</div>
+
+      <!-- SHIELD -->
+      <div class="shield-wrapper">
+
+          <div class="shield">
+              <div class="shield-half"></div>
+              <div class="score" id="scoreNumber">0</div>
+          </div>
+
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="progress-wrap">
+          <span>0</span>
+          <div class="progress-bar">
+              <div id="progressFill"></div>
+          </div>
+          <span>100</span>
+      </div>
+
+      <div class="rule-title">Credit point rule</div>
+
+      <p class="credit-text">
+          Regular activity improves your credit level.
+          Verified accounts and successful withdrawals
+          increase trust score and unlock faster payouts.
+          Contact support if you face any issues.
+      </p>
+
+      <button class="close-credit" id="closeCredit">Close</button>
+
+  </div>
 </div>
 
 <!-- ================= REVIEW OVERLAY ================= -->
@@ -390,19 +557,67 @@ Submit Review
 
     </div>
 </div>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-    const profileBtn = document.getElementById("profileBtn");
+/* CREDIT PANEL */
+const creditBtn = document.getElementById("creditBtn");
+const creditPanel = document.getElementById("creditPanel");
+const closeCredit = document.getElementById("closeCredit");
+const scoreNumber = document.getElementById("scoreNumber");
+const progressFill = document.getElementById("progressFill");
 
-    if (profileBtn) {
-        profileBtn.addEventListener("click", () => {
-            console.log("Profile clicked");
-            window.location.href = "profile.html";
-        });
-    }
+creditBtn.onclick = openCredit;
+closeCredit.onclick = ()=> creditPanel.classList.remove("active");
 
-});
+function openCredit(){
+creditPanel.classList.add("active");
+animateCredit(generateScore());
+}
+
+function generateScore(){
+
+/* Base premium trust score */
+let score = 95;
+
+/* small natural variation */
+score += Math.floor(Math.random()*6); // 95–100
+
+/* extra boost if profile completed */
+if(localStorage.bankName) score += 1;
+if(localStorage.upiId) score += 1;
+
+/* never exceed 100 */
+return Math.min(score,100);
+}
+
+/* ANIMATION */
+function animateCredit(target){
+
+let current = 0;
+
+const interval = setInterval(()=>{
+
+current++;
+scoreNumber.innerText=current;
+progressFill.style.width=current+"%";
+
+if(current>=target) clearInterval(interval);
+
+},20);
+}
+
+</script>
+
+<script>
+/* PROFILE PAGE REDIRECT */
+const profileBtn = document.getElementById("profileBtn");
+
+if (profileBtn) {
+    profileBtn.addEventListener("click", () => {
+        window.location.href = "profile.html";
+    });
+}
 </script>
 
 <!-- ⭐ IMPORTANT -->
