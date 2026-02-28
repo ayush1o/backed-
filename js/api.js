@@ -1,6 +1,6 @@
 (function (global) {
   const DEMO_ACCOUNT = {
-    email: 'admin@demo.com',
+    email: '1234567891',
     password: '1234',
     name: 'Demo Admin'
   };
