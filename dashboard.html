@@ -402,6 +402,17 @@ color:white;
 font-weight:600;
 cursor:pointer;
 }
+.nav-icon{
+    width:22px;
+    height:22px;
+    margin-left:12px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.nav-icon:active{
+    transform:scale(.9);
+}    
 
 /* MESSAGE */
 .message{
@@ -566,16 +577,8 @@ Submit Review
    CREDIT SCORE SYSTEM (Fidelity)
 ================================ */
 
-/* ---------- CREATE CREDIT ICON ---------- */
-const headerIcons = document.querySelector(".icons");
-
-const creditIcon = document.createElement("span");
-creditIcon.innerHTML = "💳";
-creditIcon.id = "creditBtn";
-creditIcon.style.cursor = "pointer";
-creditIcon.style.fontSize = "20px";
-
-headerIcons.prepend(creditIcon);
+/* CREDIT BUTTON FROM HTML IMAGE */
+const creditIcon = document.getElementById("creditBtn");
 
 
 /* ---------- CREATE CREDIT PANEL ---------- */
