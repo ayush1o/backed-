@@ -129,8 +129,10 @@ Homepage
 </div>
 
 <!-- ✅ IMPORTANT FIX -->
-<script src="js/api.js"></script>
-<script defer src="js/login.js"></script>
+<!-- API must load FIRST -->
+<script src="js/api.js?v=2"></script>
 
+<!-- Login logic loads after -->
+<script defer src="js/login.js?v=2"></script>
 </body>
 </html>
